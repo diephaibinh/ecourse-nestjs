@@ -23,7 +23,7 @@ export class AuthService {
 
   async register(registerUserDto: RegisterDto): Promise<Partial<User>> {
     const { email, password } = registerUserDto;
-    const existingUser = await this.userService.findByUserEmail(email);
+    const existingUser = await this.userModel.findOne({ email });
     if (existingUser) {
       throw new BadRequestException('User already exists');
     }
