@@ -19,7 +19,7 @@ export class CourseController {
   @Post()
   async createCourse(@Body() createCourseDto: CreateCourseDto) {
     try {
-      return await this.courseService.createCourse(createCourseDto);
+      return this.courseService.createCourse(createCourseDto);
     } catch (error) {
       throw new HttpException(
         { message: error.message },
@@ -31,7 +31,7 @@ export class CourseController {
   @Get()
   async getAllCourses() {
     try {
-      return await this.courseService.findAll();
+      return this.courseService.findAll();
     } catch (error) {
       throw new HttpException(
         { message: error.message },
@@ -43,7 +43,7 @@ export class CourseController {
   @Get(':id')
   async getCourseById(@Param('id') courseId: string) {
     try {
-      return await this.courseService.findOne(courseId);
+      return this.courseService.findOne(courseId);
     } catch (error) {
       throw new HttpException(
         { message: error.message },
@@ -58,7 +58,7 @@ export class CourseController {
     @Body() updateCourseDto: UpdateCourseDto,
   ) {
     try {
-      return await this.courseService.updateCourse(courseId, updateCourseDto);
+      return this.courseService.updateCourse(courseId, updateCourseDto);
     } catch (error) {
       throw new HttpException(
         { message: error.message },
@@ -70,7 +70,7 @@ export class CourseController {
   @Delete(':id')
   async deleteCourse(@Param('id') courseId: string) {
     try {
-      return await this.courseService.deleteCourse(courseId);
+      return this.courseService.deleteCourse(courseId);
     } catch (error) {
       throw new HttpException(
         { message: error.message },

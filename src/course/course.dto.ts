@@ -1,33 +1,55 @@
 import { IsString, IsNumber, IsArray, IsOptional } from 'class-validator';
 
-export class CreateCourseDto {
+export class CreateTopicDto {
   @IsString()
-  title: string;
+  name: string;
+}
+
+export class CreateLessonDto {
+  @IsString()
+  readonly name: string;
 
   @IsString()
   @IsOptional()
-  description: string;
+  readonly content: string;
+}
+
+export class CreateCourseDto {
+  @IsString()
+  readonly title: string;
+
+  @IsString()
+  @IsOptional()
+  readonly description?: string;
 
   @IsNumber()
-  price: number;
+  readonly price: number;
 
   @IsArray()
   @IsOptional()
-  tags?: string[];
+  readonly tags?: string[];
+
+  @IsArray()
+  @IsOptional()
+  readonly lessons?: CreateLessonDto[];
+
+  @IsString()
+  @IsOptional()
+  readonly topic: CreateTopicDto;
 }
 
 export class UpdateCourseDto {
   @IsString()
-  title: string;
+  readonly title: string;
 
   @IsString()
   @IsOptional()
-  description: string;
+  readonly description: string;
 
   @IsNumber()
-  price: number;
+  readonly price: number;
 
   @IsArray()
   @IsOptional()
-  tags?: string[];
+  readonly tags?: string[];
 }
