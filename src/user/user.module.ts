@@ -6,7 +6,8 @@ import { UserService } from './user.service';
 import { User, UserSchema } from './user.schema';
 import { UserController } from './user.controller';
 
-import { AuthGuard } from '../auth/auth.guard';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+// import { AuthGuard } from '../auth/auth.guard';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { AuthGuard } from '../auth/auth.guard';
     UserService,
     {
       provide: APP_GUARD,
-      useClass: AuthGuard,
+      useClass: JwtAuthGuard,
     },
   ],
   controllers: [UserController],

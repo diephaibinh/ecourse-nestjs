@@ -54,8 +54,6 @@ export class Course extends Document {
   lessons: Lesson[];
 }
 
-
-
 export const LessonSchema = SchemaFactory.createForClass(Lesson);
 export const CourseSchema = SchemaFactory.createForClass(Course);
 export const CourseTopicSchema = SchemaFactory.createForClass(CourseTopic);

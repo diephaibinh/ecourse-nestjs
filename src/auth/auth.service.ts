@@ -9,7 +9,6 @@ import { Model } from 'mongoose';
 
 import { RegisterDto, LoginDto } from './auth.dto';
 import { User } from '../user/user.schema';
-import { UserService } from '../user/user.service';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -17,7 +16,6 @@ export class AuthService {
   constructor(
     @InjectModel(User.name)
     private userModel: Model<User>,
-    private userService: UserService,
     private jwtService: JwtService,
   ) {}
 
@@ -48,5 +46,15 @@ export class AuthService {
       email: user.email,
     });
     return { token };
+  }
+
+  async validateUser(email: string, password: string): Promise<any> {
+    const user = await this.userModel.findOne({ email }).exec();
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      const { password, ...result } = user;
+      return result;
+    }
+    return null;
   }
 }

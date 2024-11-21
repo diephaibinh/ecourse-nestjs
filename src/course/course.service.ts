@@ -24,12 +24,12 @@ export class CourseService {
         return lessonDoc.save();
       }),
     );
-    const topicCreated = await new this.topicModel({name: topic}).save()
+    const topicCreated = await new this.topicModel({ name: topic }).save();
 
     const newCourse = new this.courseModel({
       ...courseData,
-      lessons: lessonsCreated.map(lesson => lesson._id),
-      topic: topicCreated._id,
+      lessons: lessonsCreated,
+      topic: topicCreated,
     });
     return newCourse.save();
   }
